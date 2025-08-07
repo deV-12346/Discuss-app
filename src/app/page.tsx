@@ -1,9 +1,13 @@
-import { Button } from "@/components/ui/button"
- 
-export default function Home() {
+import AddTopics from "@/components/topics/AddTopics";
+
+ export default async function Home() {
   return (
     <div>
-      <Button>Click me</Button>
+      <div className="flex justify-evenly items-center">
+       <h1 className="text-2xl font-light text-gray-500">Home Page</h1>
+      <AddTopics/>
+      </div>
     </div>
+
   )
 }
