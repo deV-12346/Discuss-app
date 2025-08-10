@@ -12,20 +12,22 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Label } from '../ui/label'
-import { createTopic } from '@/actions/create-topic'
-
-const AddTopics = () => {
-      const [formState,action] = useActionState(createTopic,{error:{}})
+import { addPost } from '@/actions/add-post'
+type cretePostFormProps = {
+      slug:string
+}
+const AddPost : React.FC<cretePostFormProps> = ({slug}) => {
+      const [formState,action] = useActionState(addPost.bind(null,slug),{errors:{}})
   return (
     <div>
        <Dialog>
             <DialogTrigger asChild>
-            <Button>Add New Topics</Button>
+            <Button>Add New Post</Button>
             </DialogTrigger>
             <DialogContent>
                   <DialogHeader>
-                        <DialogTitle>Discuss New Topics</DialogTitle>
-                        <DialogDescription>Add a new topic so everyone can discuss</DialogDescription>
+                        <DialogTitle>Discuss New Post</DialogTitle>
+                        <DialogDescription>Add a new post so everyone can discuss</DialogDescription>
                   </DialogHeader>
                    <form action={action}>
                   <div>
@@ -33,28 +35,27 @@ const AddTopics = () => {
                               <Label htmlFor='title' className='my-2'>Title</Label>
                               <Input type='text' id='title' name='title' placeholder='type title here...'></Input>
                               {
-                              formState.error?.title &&
-                              <p className='text-red-500'>{formState.error.title}</p>
+                              formState.errors?.title &&
+                              <p className='text-red-500'>{formState.errors.title}</p>
                         }
                         </div>
                          <div className='my-2'>
-                              <Label htmlFor='description' className='my-2'>Description</Label>
-                              <Textarea id='description' name='description' placeholder='type description here...' className='h-40'/>
+                              <Label htmlFor='content' className='my-2'>Content</Label>
+                              <Textarea id='content' name='content' placeholder='type content here...' className='h-40'/>
                         {
-                              formState.error?.description &&
-                              <p className='text-red-500'>{formState.error.description}</p>
+                              formState?.errors?.content &&
+                              <p className='text-red-500'>{formState.errors.content}</p>
                         }
                         {
-                              formState.error?.formError &&
+                              formState.errors?.formError &&
                               <div className='my-2 '>
-                              <p className='text-red-500'>{formState.error?.formError}</p>
+                              <p className='text-red-500'>{formState.errors?.formError}</p>
                               </div>
                         }
                         </div>
                         <div className='text-center'>
                              <Button type='submit'>Add</Button>
                         </div>
-                        
                   </div>
                    </form>
             </DialogContent>
@@ -63,4 +64,4 @@ const AddTopics = () => {
   )
 }
 
-export default AddTopics
+export default AddPost

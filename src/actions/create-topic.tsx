@@ -7,7 +7,7 @@ import { z} from "zod"
 import type { Topic } from "@prisma/client";
 const createTopicSchema = z.object({
       title:z.string().min(3).regex(/^[a-z-]+$/,{message:" Must be in lower case with space"}),
-      description:z.string().min(5)
+      description:z.string().min(10)
 })
 type CreateTopicFormState = {
       error?:{
