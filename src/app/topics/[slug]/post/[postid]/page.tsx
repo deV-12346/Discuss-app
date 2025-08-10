@@ -2,7 +2,9 @@ import React from 'react'
 
 const SpecificPost = () => {
   return (
-    <div>SpecificPost</div>
+    <div>
+      hello
+    </div>
   )
 }
 

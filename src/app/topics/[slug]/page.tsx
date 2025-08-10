@@ -1,18 +1,23 @@
 import AddPost from '@/components/post/AddPost'
+import { Postlist } from '@/components/post/Post-list'
+import { fetchPost } from '@/lib/post/query'
 import React from 'react'
 type ShowSpecificTopicProps = {
-    params :Promise<{slug:string}>
+    params :{slug:string}
 }
 
-const ShowSpecificTopic : React.FC<ShowSpecificTopicProps> = async({params}) => {
-  const slug = (await params).slug
+const ShowSpecificTopic  = async({params}:ShowSpecificTopicProps) => {
+  const slug =  params.slug
   return (
-    <div>
+    <div className='md:mx-10'>
       <div className='flex justify-evenly items-center'>
-         <h1 className='text-4xl'>{slug.toUpperCase()}</h1>
+         <h1 className='text-4xl font-bol d'>{slug.toUpperCase()}</h1>
       <div>
         <AddPost slug={slug}/>
       </div>
+      </div>
+      <div className='flex justify-center items-center'>
+         <Postlist fetchData = {()=> fetchPost(slug) }/>
       </div>
     </div>
   )
